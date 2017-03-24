@@ -1,0 +1,104 @@
+<!-- Breadcrums start -->
+<section id="blogArchive">      
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="blog-breadcrumbs-area">
+            <div class="container">
+              <div class="blog-breadcrumbs-left">
+                <h2>Reviews</h2>
+              </div>
+              <div class="blog-breadcrumbs-right">
+                <ol class="breadcrumb">
+                  <li>You are here</li>
+                  <li><a href="#">Home</a></li>                  
+                  <li class="active">Reviews</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>      
+</section>    
+<!-- Breadcrums end -->
+
+
+      <% if user_signed_in? %>
+          welcome <%= current_user.username %>
+            <%= link_to  new_review_path, class: "btn btn-info" do %>
+              <i class="glyphicon glyphicon-plus"></i> Add Review
+            <% end %>
+       <% else %>
+       <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"> Add Review</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">  "Login"</h4>
+       
+        
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal"></button>
+        <h4 class="modal-title"> <button><li><%= link_to "Registraion", new_user_registration_path %></li></h4></button>
+         <h4 class="modal-title"> <button><li><%= link_to "Login", new_user_session_path %></li></h4></button>
+
+         
+      </div>
+    </div>
+
+  </div>
+</div>
+
+      <% end %>
+
+       <div class="thumbnail">
+           <% @reviews.each do |review| %>
+            
+          <!--   <%= review.comment %>-<%= review.rating%><br/> -->
+            <div class=container ><%= review.comment %>-<%= review.rating%>-<% review.user.name%></div><br/>
+          
+        <!-- <p>HI they served us good, i went for the service neonatal </p>-<br/> -->
+
+        <%= link_to  edit_review_path(review), class: "btn btn-info" do %>
+          <i class="glyphicon glyphicon-plus"></i> Edit Review
+        <% end %><br/>
+
+        <%= link_to review_path(review), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-primary" do %>
+                   Destroy <span class="glyphicon glyphicon-edit"></span>
+        <% end %><br/>
+       <% end %>
+      </div>
+<!--         
+        <%# if can? :update, BloodBank %>
+                   <td><%# link_to edit_blood_bank_path(bank), class: "btn btn-primary" do %>
+                   Update <span class="glyphicon glyphicon-pencil"></span>
+                   <%# end %>
+                   <%# link_to 'Edit', edit_blood_bank_path(bank) %>
+                   <%# end %></td>
+                  
+                
+
+                   <%# if can? :destroy, BloodBank %>
+                   <td><%# link_to blood_bank_path(bank), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-primary" do %>
+                   Destroy <span class="glyphicon glyphicon-edit"></span>
+                   <%# end %>
+                   <%# link_to 'Destroy', bank, method: :delete, data: { confirm: 'Are you sure?' } %>
+                   <%# end %></td>
+      
+ -->
+      
+        
+  
+
+
+
+  
