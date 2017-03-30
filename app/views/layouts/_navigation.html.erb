@@ -1,9 +1,11 @@
-<!--=========== BEGIN HEADER SECTION ================-->
+   <!--last one of navigation start -->
+ <!--=========== BEGIN HEADER SECTION ================-->
     <header id="header">
       <!-- BEGIN MENU -->
       <div class="menu_area">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">  
           <div class="container">
+           <% if user_signed_in? %>
             <div class="navbar-header">
               <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -14,69 +16,76 @@
               </button>
               <!-- LOGO -->              
               <!-- TEXT BASED LOGO -->
-              <a class="navbar-brand" href="#"><i class="fa fa-heartbeat"></i>Neowomb <span>Health Care</span></a>              
+               <a class="navbar-brand" href="#"><i class="fa fa-heartbeat"></i>Neowomb <span>Health Care</span></a><br/>             
               <!-- IMG BASED LOGO  -->
               <!--  <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>   -->                    
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
-              <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                
-                <li><%# link_to "BloodBanks", blood_banks_path %></li>
-                <li><%# link_to "Stocks", stocks_path %></li>
-                <li><%# link_to "PersonDetails", person_details_path %></li>
-                <li><%# link_to "Require Donar", require_donars_path %><br/></li>
-                
-              </ul> -->
-                <li class="active"><a href="<%= stores_path %>">Home</a></li>
-                <!-- <li><a href="features.html">Features</a></li> -->
-                <li><a href="<%= aboutuspages_path %>">ABOUT US</a></li>
-                <li><a href="<%= services_path %>">SERVICES</a></li>
-                <li><a href="<%= gallerys_path %>">Gallery</a></li>
-                <li><a href="<%= %>">Appointment</a></li>
-                <li><a href="<%= contactuspages_path %>">Contact</a></li>
-                <li><a href="<%= reviews_path %>">Reviews</a></li>
-
-                <!-- <li><a href="services/index">Services</a></li>
-                <li><a href="gallerys/index">Gallery</a></li>
-                <li><a href="contactuspages/index">Contact</a></li> -->
-                 <!--<li><%# link_to "ABOUT US", aboutus_path %></li>-->
-                
-               <!--  <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Service <span class="fa fa-angle-down"></span></a>
+                      <li><a href="<%= stores_path %>">Home</a></li>
+                      <li><a href="<%= aboutuspages_path %>">ABOUT US</a></li>
+                      <li><a href="<%= services_path %>">SERVICES</a></li>
+                      <li><a href="<%= gallerys_path %>">Gallery</a></li>
+                      <li><a href="<%= contactuspages_path %>">Contact</a></li>
+                      <li><a href="<%= reviews_path %>">Reviews</a></li>      
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logout <span class="fa fa-angle-down"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="medical-counseling.html">Medical Counseling</a></li>
-                    <li><a href="medical-research.html">Medical Research</a></li>
-                    <li><a href="blood-bank.html">Blood Bank</a></li>
+                    <li><%= link_to "Account Setting", edit_user_registration_path %> </li>
+                  <li><%= link_to "Logout", destroy_user_session_path, method: :delete %>  </li>
                   </ul>
-                </li> -->
-                
-                <!-- <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">News <span class="fa fa-angle-down"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="blog-archive.html">Blog Archive</a></li>
-                    <li><a href="blog-archive-with-left-sidebar.html">Blog Archive with Left Sidebar</a></li>
-                    <li><a href="blog-archive-with-right-sidebar.html">Blog Archive with Right Sidebar</a></li>
-                    <li><a href="blog-single.html">Blog Single</a></li>
-                    <li><a href="blog-single-with-left-sidebar.html">Blog Single with Left Sidebar</a></li>
-                    <li><a href="blog-single-with-right-sidebar.html">Blog Single with Right Sidebar</a></li>           
-                  </ul>
-                </li> -->
-                <!-- <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Page <span class="fa fa-angle-down"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="404.html">404 Page</a></li>
-                    <li><a href="#">Link Two</a></li>
-                    <li><a href="#">Link Three</a></li>               
-                  </ul>
-                </li>   -->             
-                
+                </li>
               </ul>           
             </div><!--/.nav-collapse -->
+            <% else %>
+
+            <div class="navbar-header">
+              <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <!-- LOGO -->              
+              <!-- TEXT BASED LOGO -->
+               <a class="navbar-brand" href="#"><i class="fa fa-heartbeat"></i>Neowomb <span>Health Care</span></a><br/>             
+              <!-- IMG BASED LOGO  -->
+              <!--  <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>   -->                    
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
+                      <li><a href="<%= stores_path %>">Home</a></li>
+                      <li><a href="<%= aboutuspages_path %>">ABOUT US</a></li>
+                      <li><a href="<%= services_path %>">SERVICES</a></li>
+                      <li><a href="<%= gallerys_path %>">Gallery</a></li>
+                      <li><a href="<%= contactuspages_path %>">Contact</a></li>
+                      <li><a href="<%= reviews_path %>">Reviews</a></li>       
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login <span class="fa fa-angle-down"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <!-- <button type="button" class="btn btn-default btn-lg" data-toggle="modal"  data-target="#ishu">Log in</button> 
+                    <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#signUp">Signup</button> -->
+                    <li><%= link_to "Login", new_user_session_path %></li>
+                 <li><%= link_to "Signup", new_user_registration_path %></li> 
+                  </ul>
+                </li>
+              </ul>           
+            </div><!--/.nav-collapse -->
+            
+            <% end %>
           </div>     
         </nav>  
       </div>
-      <!-- END MENU -->    
+      <!-- END MENU -->  
+
+   
     </header>
     <!--=========== END HEADER SECTION ================-->   
+
+
+
+    <!--last one of navigation end -->
+
+<!--  <%# render 'devise/sessions/new' %>
+<%# render 'devise/registrations/new' %>   -->

@@ -9,8 +9,11 @@
               </div>
               <div class="blog-breadcrumbs-right">
                 <ol class="breadcrumb">
-                  <li>You are here</li>
-                  <li><a href="#">Home</a></li>                  
+                  
+                  <li><% if user_signed_in? %>
+                    Hi &nbsp<%= current_user.email %>
+                  <% end %>--You are here</li>
+                   <li><a href="#">Home</a></li>                  
                   <li class="active">Reviews</li>
                 </ol>
               </div>
@@ -23,13 +26,19 @@
 
 
       <% if user_signed_in? %>
-          welcome <%= current_user.username %>
+
+          <button type="button" class="btn btn-danger">welcome <%= current_user.email %></button>
+          
             <%= link_to  new_review_path, class: "btn btn-info" do %>
               <i class="glyphicon glyphicon-plus"></i> Add Review
             <% end %>
        <% else %>
+<p class="bg-primary"></p>
        <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"> Add Review</button>
+<div class="container">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> Add Your Review</button>  
+</div>
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -39,66 +48,68 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">  "Login"</h4>
-       
-        
+        <h4 class="modal-title">Sign in to complete your review</h4>
       </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
+      <div class="modal-body", style="text-align:center">
+        <h2><button type="button" class="btn btn-danger" data-dismiss="modal"><a href new_user_registration_path >Continue with Facebook</a></button></h2>
+        
+        <p><button type="button" class="btn btn-info" data-dismiss="modal"><a href new_user_registration_path >Continue with Google</a></button></p>
+        <h5>or</h5>
+         <p style="text-align:center">Or use your email address</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal"></button>
-        <h4 class="modal-title"> <button><li><%= link_to "Registraion", new_user_registration_path %></li></h4></button>
-         <h4 class="modal-title"> <button><li><%= link_to "Login", new_user_session_path %></li></h4></button>
+        <!-- <button type="button" class="btn btn-info" data-dismiss="modal"></button> -->
+        <!-- <h4 class="modal-title"> <li><%# link_to "Registraion", new_user_registration_path %></li></h4>
+         <h4 class="modal-title"> <li><%# link_to "Login", new_user_session_path %></li></h4> -->
+        <!--  <h3> <button type="button" class="btn btn-info" data-dismiss="modal"><a href new_user_registration_path >Registration</a></button></h3>
+          <h3><button type="button" class="btn btn-info" data-dismiss="modal"><a href new_user_session_path >Login</a></button></h3>
+           <button type="button" class="btn btn-info" data-dismiss="modal"><%# link_to "Signup", new_user_registration_path %></button>
+         <button type="button" class="btn btn-info"><span><li><%# link_to "Login", new_user_session_path %></li></span></button> -->
+          <!-- <h4> <li><%# link_to "Signup", new_user_registration_path %></li>
+           <li><%# link_to "Login", new_user_session_path %></li></h4> -->
 
-         
-      </div>
-    </div>
+<div class="col-md-10">
+            <form class="button_to" method="get" action="/users/sign_in">
+            <!--  <input class="btn btn-info" type="submit" value="Login"> </form>-->
+            <input class="btn btn-info" type="submit" data-toggle="modal" data-target="#myModal" value="Login">
 
-  </div>
+           </form> 
+           <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> -->
+
+<div class="col-md-2">
+             <form class="button_to" method="get" action="/users/sign_up">
+            <input class="btn btn-info" type="submit" value="Signup"> </form>
+</div>
 </div>
 
-      <% end %>
 
-       <div class="thumbnail">
-           <% @reviews.each do |review| %>
-            
-          <!--   <%= review.comment %>-<%= review.rating%><br/> -->
-            <div class=container ><%= review.comment %>-<%= review.rating%>-<% review.user.name%></div><br/>
+
           
-        <!-- <p>HI they served us good, i went for the service neonatal </p>-<br/> -->
-
-        <%= link_to  edit_review_path(review), class: "btn btn-info" do %>
-          <i class="glyphicon glyphicon-plus"></i> Edit Review
-        <% end %><br/>
-
-        <%= link_to review_path(review), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-primary" do %>
-                   Destroy <span class="glyphicon glyphicon-edit"></span>
-        <% end %><br/>
-       <% end %>
       </div>
-<!--         
-        <%# if can? :update, BloodBank %>
-                   <td><%# link_to edit_blood_bank_path(bank), class: "btn btn-primary" do %>
-                   Update <span class="glyphicon glyphicon-pencil"></span>
-                   <%# end %>
-                   <%# link_to 'Edit', edit_blood_bank_path(bank) %>
-                   <%# end %></td>
-                  
-                
+    </div>
+  </div>
+</div>
+<% end %>
 
-                   <%# if can? :destroy, BloodBank %>
-                   <td><%# link_to blood_bank_path(bank), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-primary" do %>
-                   Destroy <span class="glyphicon glyphicon-edit"></span>
-                   <%# end %>
-                   <%# link_to 'Destroy', bank, method: :delete, data: { confirm: 'Are you sure?' } %>
-                   <%# end %></td>
-      
- -->
-      
-        
-  
+        <div class="thumbnail">
+           <% @reviews.each do |review| %>
+              <div class=container >
+              <button type="button" class="btn btn-danger">Rating-<%= review.rating%>---</button>--<%= review.comment %>
 
+                Rating-<%= review.rating%>---<!--  <%# review.user.email %>- -->--<%= review.comment %>
+              </div><br/><br/><br/>
 
+              <% if can? :update, review %>
+                  <%= link_to  edit_review_path(review), class: "btn btn-info" do %>
+                    <i class="glyphicon glyphicon-edit"></i> Edit Review
+                  <% end %><br/>
+              <% end %>
 
-  
+              <% if can? :delete, review %>
+                  <%= link_to review_path(review), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-primary" do %>
+                      <i class="glyphicon glyphicon-trash"></i> Delete
+                    <% end %><br/>
+              <% end %>
+            <% end %>
+        </div>
+       
