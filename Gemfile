@@ -7,7 +7,7 @@ gem 'rails', '4.2.6'
 gem 'jquery-turbolinks'
 gem 'photoswipe-rails'
 gem 'devise'
-
+gem 'cancancan'
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production

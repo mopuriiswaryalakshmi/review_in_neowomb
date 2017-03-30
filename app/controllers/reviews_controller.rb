@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
 
+    before_action :authenticate_user!, except: [:index]
+    load_and_authorize_resource
 	def index 
 		@reviews = Review.all
         
@@ -11,7 +13,7 @@ class ReviewsController < ApplicationController
 
     def create
     	@review = Review.new(review_params)
-    	#@review.user_id = current_user.id
+    	@review.user_id = current_user.id
     	if @review.save
     		#redirect_to service_path(@review.service_id), notice: "successfully created"
             redirect_to reviews_path, notice: "successfully created"

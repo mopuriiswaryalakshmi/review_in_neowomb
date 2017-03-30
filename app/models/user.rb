@@ -5,4 +5,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
          has_many :reviews
+
+         has_many :permissions
+         has_many :roles, through: :permissions
+
+         after_create :generate_role
+
+         def role?(role)
+         	self.roles.pluck(:name).include? role 
+         end
+
+         def generate_role
+         	Permission.create(user_id: self.id, role_id: Role.last.id)
+         end
+
 end
