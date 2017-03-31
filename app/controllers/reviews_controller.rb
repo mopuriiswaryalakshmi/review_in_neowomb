@@ -30,6 +30,15 @@ class ReviewsController < ApplicationController
 		@review = Review.find(params[:id])
     end
 
+    def update
+        @review = Review.find(params[:id])
+        if @review.save
+                redirect_to reviews_path, notice: "successfully updated"
+        else
+            render action: "edit"
+        end
+    end
+
     def destroy
         @review = Review.find(params[:id])
         @review.destroy

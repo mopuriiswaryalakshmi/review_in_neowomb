@@ -25,7 +25,7 @@ def index
 		    @service=Sevice.find(params[:id])
 		    
 	    rescue ActiveRecord::RecordNotFound
-	    	redirect_to service_path(@service), notice: "Record Not Found"
+	    	redirect_to services_path, notice: "Record Not Found"
 	    end
 	end
 
@@ -37,9 +37,9 @@ def index
 	def update
 		@service=Service.find(params[:id])
 		if service.save
-				redirect_to service_path(@service), notice: "successfully updated"
+				redirect_to services_path, notice: "successfully updated"
 		else
-			render action :edit
+			render action: "edit"
 		end
 	end
 
