@@ -4,7 +4,6 @@ class ReviewsController < ApplicationController
     load_and_authorize_resource
 	def index 
 		@reviews = Review.all
-        
     end
 
     def new
@@ -15,7 +14,6 @@ class ReviewsController < ApplicationController
     	@review = Review.new(review_params)
     	@review.user_id = current_user.id
     	if @review.save
-    		#redirect_to service_path(@review.service_id), notice: "successfully created"
             redirect_to reviews_path, notice: "successfully created"
     	else
     		render action: "new"
